@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import rospy
+from std_srvs.srv import Trigger, TriggerResponse
+
+def trigger_service_callback(request):
+    rospy.loginfo('Trigger service called')
+    response = TriggerResponse()
+    response.success = True
+    response.message = 'Trigger service executed successfully'
+    return response
+
+if __name__ == '__main__':
+    rospy.init_node('service_server_node')
+    trigger_service = rospy.Service('trigger_service', Trigger, trigger_service_callback)
+    rospy.spin()
