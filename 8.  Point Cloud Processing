@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import rospy
+from sensor_msgs.msg import PointCloud2
+import pcl
+
+def point_cloud_callback(msg):
+    # Konversi PointCloud2 menjadi PCL PointCloud
+    pcl_cloud = pcl.PointCloud()
+    # ...
+    # Proses PCL pada PointCloud
+    # ...
+    # Konversi PCL PointCloud kembali ke PointCloud2
+    # ...
+    # Publish hasil PointCloud2
+    # ...
+
+if __name__ == '__main__':
+    try:
+        rospy.init_node('point_cloud_processor_node')
+        rospy.Subscriber('point_cloud', PointCloud2, point_cloud_callback)
+        rospy.spin()
+    except rospy.ROSInterruptException:
+        pass
