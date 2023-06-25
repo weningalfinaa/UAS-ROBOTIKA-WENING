@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+import rospy
+from geometry_msgs.msg import Twist
+
+def velocity_publisher():
+    rospy.init_node('velocity_publisher_node')
+    velocity_publisher = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+    rate = rospy.Rate(1)  # Frekuensi publishing: 1 Hz
+    while not rospy.is_shutdown():
+        velocity_msg = Twist()
+        velocity_msg.linear.x = 0.5  # Kecepatan linear
+        velocity_msg.angular.z = 0.2  # Kecepatan angular
+        velocity_publisher.publish(velocity_msg)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        velocity_publisher()
+    except rospy.ROSInterruptException:
+        pass
